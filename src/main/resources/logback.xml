@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+       <contextName>Spring_Core</contextName>
+
+       <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+              <layout class="ch.qos.logback.classic.PatternLayout">
+                     <pattern>%5p | %-45logger{45} | %m %n</pattern>
+              </layout>
+       </appender>
+
+       <logger name='org.springframework' level="ERROR"/>
+       <logger name='ch.qos.logback' level="WARN"/>
+       <logger name='org.hibernate.cfg' level="ERROR"/>
+       <logger name='org.hibernate.jpa' level="ERROR"/>
+       <logger name='org.hibernate.internal' level="ERROR"/>
+       <logger name='org.hibernate.integrator' level="ERROR"/>
+       <logger name='org.hibernate.id' level="ERROR"/>
+       <logger name='org.hibernate.stat' level="ERROR"/>
+       <logger name='org.hibernate.loader' level="ERROR"/>
+       <logger name='org.hibernate.persister' level="ERROR"/>
+       <logger name='org.hibernate.engine' level="ERROR"/>
+       <logger name='org.hibernate.type' level="ERROR"/>
+       <logger name='org.hibernate.service' level="ERROR"/>
+       <logger name='org.hibernate.boot' level="ERROR"/>
+       <logger name='org.hibernate.cache' level="ERROR"/>
+       <logger name='com.jolbox.bonecp' level="ERROR"/>
+       <logger name='org.jboss.logging' level="ERROR"/>
+
+       <root level="DEBUG">
+              <!--<level value='DEBUG'/>-->
+              <appender-ref ref='CONSOLE'/>
+       </root>
+
+</configuration>

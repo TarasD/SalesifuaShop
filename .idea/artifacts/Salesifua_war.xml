@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="Salesifua:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Salesifua.war">
+      <element id="artifact" artifact-name="Salesifua:war exploded" />
+    </root>
+  </artifact>
+</component>
