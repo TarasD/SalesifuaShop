@@ -2,18 +2,11 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Shop;
 import com.springapp.mvc.service.IShopService;
-import com.springapp.mvc.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController

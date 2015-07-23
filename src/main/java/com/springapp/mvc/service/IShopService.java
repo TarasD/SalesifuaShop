@@ -1,9 +1,6 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.domain.Shop;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
