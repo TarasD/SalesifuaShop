@@ -3,6 +3,7 @@ package com.springapp.mvc.service;
 import com.springapp.mvc.domain.Shop;
 import com.springapp.mvc.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class ShopService implements IShopService{
     @Autowired
     private ShopRepository shopRepository;
 
-    public List<Shop> getAll() {
-        return shopRepository.findAll();
+    public List<Shop> getAll(Sort sort) {
+        return shopRepository.findAll(sort);
     }
 
     public Shop getShop(Long id) {

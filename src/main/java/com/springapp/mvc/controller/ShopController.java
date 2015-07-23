@@ -4,6 +4,7 @@ import com.springapp.mvc.domain.Shop;
 import com.springapp.mvc.service.IShopService;
 import com.springapp.mvc.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,8 @@ public class ShopController {
 			method = RequestMethod.GET,
 			value = "/all")
 	public List<Shop> getAll() {
-
-		return shopService.getAll();
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+		return shopService.getAll(sort);
 	}
 
 	@RequestMapping(
@@ -89,9 +90,9 @@ public class ShopController {
 
 	@RequestMapping(value = "/sort/{field}",
 			method = RequestMethod.GET)
-	public String sortBy(@PathVariable("field") String field) {
-
-		return "sorted";
+	public List<Shop> sortBy(@PathVariable("field") String field) {
+        Sort sort = new Sort(Sort.Direction.ASC, field);
+        return shopService.getAll(sort);
 	}
 
 	@RequestMapping(value = "/filter/{field}={value}",
