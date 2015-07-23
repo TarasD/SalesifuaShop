@@ -25,14 +25,14 @@ public class ShopService implements IShopService{
     }
 
     public Shop addShop(Shop shop) {
-        return null;
+        return shopRepository.save(shop);
     }
 
     public void deleteShop(Long id) {
-
+        shopRepository.delete(id);
     }
 
-    public Shop updateShop(Shop shop) {
-        return null;
+    public List<Shop> findByName(String name) {
+        return shopRepository.findByName(name);
     }
 }

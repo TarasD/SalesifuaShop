@@ -16,5 +16,5 @@ public interface IShopService {
 
     void deleteShop(Long id);
 
-    Shop updateShop(Shop shop);
+    List<Shop> findByName(String name);
 }

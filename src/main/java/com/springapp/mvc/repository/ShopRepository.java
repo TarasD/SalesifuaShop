@@ -9,5 +9,5 @@ import java.util.List;
  * Created by taras on 22.07.15.
  */
 public interface ShopRepository extends JpaRepository<Shop, Long> {
-
+    List<Shop> findByName(String name);
 }

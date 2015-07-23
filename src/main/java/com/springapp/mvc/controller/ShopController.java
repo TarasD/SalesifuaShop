@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Shop;
+import com.springapp.mvc.service.IShopService;
 import com.springapp.mvc.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ShopController {
 
 	@Autowired
-	private ShopService shopService;
+	private IShopService shopService;
 
 	@RequestMapping("")
 	public String help() {
@@ -52,19 +53,27 @@ public class ShopController {
 			value = "/add",
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public String addPerson(@RequestBody Shop shop) {
+	public Shop addPerson(@RequestBody Shop shop) {
+		return shopService.addShop(shop);
 
-		//return shopService.addShop(shop);
-
-		return "added";
+		//return "added";
 	}
 
-	@RequestMapping(value = "/update/{id}",
-			method = RequestMethod.PUT,
-			headers="Accept=application/json")
+	@RequestMapping(
+			method = RequestMethod.PATCH,
+			value = "/update/{id}",
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
 	public Shop updatePerson(@PathVariable("id") Long id, @RequestBody Shop shop) {
+        Shop dbShop = shopService.getShop(id);
 
-		return shopService.updateShop(shop);
+        if(shop.getName() != null) dbShop.setName(shop.getName());
+        if(shop.getAddress() != null) dbShop.setAddress(shop.getAddress());
+        if(shop.getEmail() != null) dbShop.setEmail(shop.getEmail());
+        if(shop.getPhoneNumber() != null) dbShop.setPhoneNumber(shop.getPhoneNumber());
+        if(shop.getPassword() != null) dbShop.setPassword(shop.getPassword());
+
+        return shopService.addShop(dbShop);
 	}
 
 
@@ -92,11 +101,11 @@ public class ShopController {
 		return "ordered";
 	}
 
-	@RequestMapping(value = "/search/{field}={value}",
+	@RequestMapping(value = "/search/{name}",
 			method = RequestMethod.GET)
-	public String search(@PathVariable("field") String field, @PathVariable("value") String value) {
+	public List<Shop> search(@PathVariable("name") String name) {
 
-		return "searched";
+        return shopService.findByName(name);
 	}
 
 	@RequestMapping(value = "/pagable/{amount}",

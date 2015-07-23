@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "shop")
+@Table(name = "shops")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
 public class Shop {
 
