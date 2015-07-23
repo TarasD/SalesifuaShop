@@ -4,6 +4,8 @@ import com.springapp.mvc.domain.Shop;
 import com.springapp.mvc.service.IShopService;
 import com.springapp.mvc.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,16 +38,16 @@ public class ShopController {
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/all")
-	public List<Shop> getAll() {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
-		return shopService.getAll(sort);
+	public List<Shop> getAll(@RequestParam(value ="page") int page, @RequestParam(value = "amount") int amount) {
+        //
+        return shopService.getAll(page, amount, "id");
 	}
 
 	@RequestMapping(
 			method = RequestMethod.GET,
 			value = "/{id}")
 	public Shop getShop(@PathVariable("id") Long id) {
-
+        //
 		return shopService.getShop(id);
 	}
 
@@ -55,9 +57,8 @@ public class ShopController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Shop addPerson(@RequestBody Shop shop) {
-		return shopService.addShop(shop);
-
-		//return "added";
+		//
+        return shopService.addShop(shop);
 	}
 
 	@RequestMapping(
@@ -83,30 +84,29 @@ public class ShopController {
 			value = "/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public String deleteEmployee(@PathVariable("id") Long id) {
-
+        //
 		shopService.deleteShop(id);
 		return "done";
 	}
 
 	@RequestMapping(value = "/sort/{field}",
 			method = RequestMethod.GET)
-	public List<Shop> sortBy(@PathVariable("field") String field) {
-        Sort sort = new Sort(Sort.Direction.ASC, field);
-        return shopService.getAll(sort);
+	public List<Shop> sortBy(@PathVariable("field") String field, @RequestParam(value ="page") int page, @RequestParam(value = "amount") int amount) {
+        return shopService.getAll(page, amount, field);
 	}
 
 	@RequestMapping(value = "/filter/{field}={value}",
 			method = RequestMethod.GET)
-	public String orderBy(@PathVariable("field") String field, @PathVariable("value") String value) {
-
-		return "ordered";
+	public List<Shop> orderBy(@PathVariable("field") String field, @PathVariable("value") String value) {
+        System.out.println(field + " " + value);
+        return shopService.findBy(field, value);
 	}
 
 	@RequestMapping(value = "/search/{name}",
 			method = RequestMethod.GET)
 	public List<Shop> search(@PathVariable("name") String name) {
 
-        return shopService.findByName(name);
+        return shopService.findBy("name", name);
 	}
 
 	@RequestMapping(value = "/pagable/{amount}",

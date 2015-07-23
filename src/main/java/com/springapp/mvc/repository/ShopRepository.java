@@ -10,4 +10,8 @@ import java.util.List;
  */
 public interface ShopRepository extends JpaRepository<Shop, Long> {
     List<Shop> findByName(String name);
+    List<Shop> findByAddress(String address);
+    List<Shop> findByEmail(String email);
+    List<Shop> findByPhoneNumber(String phoneNumber);
+    List<Shop> findByPassword(String password);
 }

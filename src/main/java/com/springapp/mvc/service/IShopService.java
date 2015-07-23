@@ -1,6 +1,8 @@
 package com.springapp.mvc.service;
 
 import com.springapp.mvc.domain.Shop;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * Created by taras on 22.07.15.
  */
 public interface IShopService {
-    List<Shop> getAll(Sort sort);
+    List<Shop> getAll(int page, int amount, String field);
 
     Shop getShop(Long id);
 
@@ -17,5 +19,5 @@ public interface IShopService {
 
     void deleteShop(Long id);
 
-    List<Shop> findByName(String name);
+    List<Shop> findBy(String field, String value);
 }
